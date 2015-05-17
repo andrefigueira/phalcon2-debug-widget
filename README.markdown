@@ -25,7 +25,7 @@ If it looks familiar, its because its modeled after the [Yii debug toolbar](http
 
 composer.json:
 ```
-"zazza/phalcon-debug-widget": "dev-master"
+"zazza/phalcon2-debug-widget": "dev-master"
 ```
 
 Copy or move the /vendor/zazza/phalcon-debug-widget/src/pdw-assets folder to your public folder.
