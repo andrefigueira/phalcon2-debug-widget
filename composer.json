@@ -1,5 +1,5 @@
 {
-    "name": "phalcon/debugger",
+    "name": "phalcon-tools/debugger",
     "version": "0.0.3",
     "description": "Phalcon Debug toolbar",
     "require": {
