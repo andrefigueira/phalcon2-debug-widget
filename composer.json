@@ -1,6 +1,6 @@
 {
     "name": "phalcon/debugger",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Phalcon Debug toolbar",
     "require": {
         "php": ">=5.6.0"
@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Phalcon\\Debug\\": "src/"
+            "Phalcon\\Debug\\": "src/Debug/"
         }
     }
 }
