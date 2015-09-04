@@ -51,6 +51,10 @@ class DebugWidget implements InjectionAwareInterface
      */
     protected $serviceNames = [];
 
+    /**
+     * @param DiInterface $di
+     * @param array $serviceNames
+     */
     public function __construct($di, $serviceNames = ['db' => ['db'], 'dispatch' => ['dispatcher'], 'view' => ['view']])
     {
         $this->di = $di;
