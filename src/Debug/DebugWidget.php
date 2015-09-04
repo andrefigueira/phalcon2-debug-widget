@@ -44,12 +44,12 @@ class DebugWidget implements InjectionAwareInterface
     /**
      * @var array
      */
-    protected $_viewsRendered = array();
+    protected $viewsRendered = [];
 
     /**
      * @var array
      */
-    protected $_serviceNames = array();
+    protected $serviceNames = [];
 
     public function __construct($di, $serviceNames = ['db' => ['db'], 'dispatch' => ['dispatcher'], 'view' => ['view']])
     {
@@ -160,7 +160,7 @@ class DebugWidget implements InjectionAwareInterface
             }
         }
 
-        $this->_viewsRendered[] = [
+        $this->viewsRendered[] = [
             'path' => $view->getActiveRenderPath(),
             'params' => $params,
             'controller' => $view->getControllerName(),
@@ -192,7 +192,7 @@ class DebugWidget implements InjectionAwareInterface
     public function renderToolbar()
     {
         $view = new View();
-        $viewDir = dirname(__FILE__) .'/views/';
+        $viewDir = __DIR__ . '/views/';
         $view->setViewsDir($viewDir);
 
         $view->setVar('debugWidget', $this);
@@ -223,7 +223,7 @@ class DebugWidget implements InjectionAwareInterface
      */
     public function getRenderedViews()
     {
-        return $this->_viewsRendered;
+        return $this->viewsRendered;
     }
 
     /**
