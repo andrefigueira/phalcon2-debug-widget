@@ -3,7 +3,8 @@
     "version": "0.0.4",
     "description": "Phalcon Debug toolbar",
     "require": {
-        "php": ">=5.5.0"
+        "php": ">=5.5.0",
+        "jdorn/sql-formatter": "*"
     },
     "license": "MIT",
     "authors": [

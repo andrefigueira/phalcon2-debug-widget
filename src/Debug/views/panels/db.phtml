@@ -1,75 +1,93 @@
 <?php
 
+// Include the SQL Formatter
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/vendor/jdorn/sql-formatter/lib/SqlFormatter.php';
+
 $profiles = $debugWidget->getProfiler()->getProfiles();
 $profiles = !$profiles? array() : $profiles;
 
+$dbs = $debugWidget->getServices('db');
+
 ?>
+
 <div id='pdw-panel-db' class='pdw-panel db'>
     <div class='title'>
-        <h2>Database Info <a class='pdw-panel-close'>&times;</a></h2>
+        <h2>Database <a class='pdw-panel-close' id="phalcon-debugger-close-db-tab">&times;</a></h2>
     </div>
     <div class='panel-content'>
-        <h3 class='collapser'>SQL Queries</h3>
-        <table class='pdw-sql-data-table'>
-            <thead>
+        <?php foreach ($dbs as $dbName) : ?>
+            <?php
+
+            $db = $debugWidget->getDI()->get($dbName);
+            $descriptors = $db->getDescriptor();
+
+            ?>
+
+            <h3 class='collapser'>DB Server</h3>
+
+            <table class='pdw-data-table'>
                 <tr>
-                    <th>Query</th>
-                    <th style="width: 100px">Time (s)</th>
+                    <td>Type</td>
+                    <td><?php echo $db->getType(); ?></td>
                 </tr>
-            </thead>
-            <tbody>
+                <?php foreach($descriptors as $k => $v) : ?>
+                    <tr>
+                        <td><?= $k; ?></td>
+                        <td>
+                            <?php
+
+                            if (is_string($v)) {
+                                if ($k != "password") {
+                                    echo $v;
+                                } else {
+                                    echo '********';
+                                }
+                            } else {
+                                echo '<pre> ' . var_dump($v) . '</pre>';
+                            }
+
+                            ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php endforeach; ?>
+
+        <h3 class='collapser'>SQL Queries</h3>
+
+        <table class='pdw-sql-data-table'>
             <?php
-                $total = 0;
-                foreach ($profiles as $profile):
-                    $time = $profile->getTotalElapsedSeconds();
-                    $total += $time;
-                    echo "<tr>";
-                        echo "<td>" . $profile->getSQLStatement() . "</td>";
-                        echo "<td>" . print_r($profile->getSQLVariables(), true) . "</td>";
-                        echo "<td>" . round($time, 6) . "</td>";
-                    echo "</tr>";
-                endforeach;
-            ?>
+
+            $total = 0;
+
+            foreach ($profiles as $profile):
+                $time = $profile->getTotalElapsedSeconds();
+                $total += $time;
+
+                $sql = $profile->getSQLStatement();
+                $sqlVars = $profile->getSQLVariables();
+
+                // Bind the values to the queries
+                if (is_array($sqlVars)) {
+                    foreach ($profile->getSQLVariables() as $key => $value) {
+                        if (!strstr($key, ':')) $key = ':' . $key;
+
+                        $sql = str_replace($key, $value, $sql);
+                    }
+                }
+
+                ?>
+                <tr>
+                    <td>
+                        <?= SqlFormatter::format($sql, true); ?>
+                        <span class="execution-time-summary">&#8593; <strong>Execution time</strong> <?= round($time, 6); ?>s</span>
+                    </td>
+                </tr>
+
+            <?php endforeach; ?>
             <tr>
-                <td><strong>Total:</strong></td>
-                <td></td>
-                <td><strong><?php echo round($total, 6); ?></strong></td>
+                <td><span class="execution-time-summary">&#8721; <strong>Total</strong> <?php echo round($total, 6); ?>s</span></td>
             </tr>
-            </tbody>
         </table>
-<?php
-        $dbs = $debugWidget->getServices('db');
-        foreach ($dbs as $dbName) {
-                $db = $debugWidget->getDI()->get($dbName);
-                $descriptors = $db->getDescriptor();
-?>
-        <h3 class='collapser'>DB Server</h3>
-        <table class='pdw-data-table'>
-            <tbody>
-            <tr>
-                <td>Type</td>
-                <td><?php echo $db->getType(); ?></td>
-            </tr>
-            <?php
-                foreach($descriptors as $k=>$v):
-                    echo "<tr>";
-                        echo "<td>{$k}</td>";
-                        if (is_string($v))
-                    if ($k != "password")
-                                echo "<td>{$v}</td>";
-                            else
-                                echo "<td>**********</td>";
-                        else
-                            echo "<td>";
-                            print_r($v);
-                            echo "</td>";
-                    echo "</tr>";
-                endforeach;
-            ?>
-            </tbody>
-        </table>
-<?php
-}
-?>
-    </div>
-</div>
+    </div><!-- End panel content -->
+</div><!-- End pdw panel -->
