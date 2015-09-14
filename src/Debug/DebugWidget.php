@@ -203,8 +203,6 @@ class DebugWidget implements InjectionAwareInterface
 
         $content = $view->getRender('toolbar', 'index');
 
-        forp_end();
-
         return $content;
     }
 
