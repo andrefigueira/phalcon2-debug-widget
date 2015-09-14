@@ -21,11 +21,6 @@
                 <small class="label"><?php echo $debugWidget->getQueryCount(); ?> queries</small>
             </a>
         </li>
-        <li>
-            <a class="pwd-link" data-id="trace">
-                <strong>Trace</strong><br />
-            </a>
-        </li>
         <li><a class="pwd-link" data-id="request"><strong>Request</strong></a></li>
     </ul>
 
@@ -331,7 +326,6 @@
                 document.getElementById("pdw-panel-server").style.display = 'none';
                 document.getElementById("pdw-panel-views").style.display = 'none';
                 document.getElementById("pdw-panel-db").style.display = 'none';
-                document.getElementById("pdw-panel-trace").style.display = 'none';
                 document.getElementById("pdw-panel-" + href).style.display = 'block';
                 this.parentNode.className = this.parentNode.className + " pdw-li-active";
                 document.body.style.overflow = 'hidden';
@@ -340,7 +334,6 @@
                 document.getElementById("pdw-panel-server").style.display = 'none';
                 document.getElementById("pdw-panel-views").style.display = 'none';
                 document.getElementById("pdw-panel-db").style.display = 'none';
-                document.getElementById("pdw-panel-trace").style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
 
@@ -362,9 +355,5 @@
 
     document.getElementById('phalcon-debugger-close-db-tab').onclick = function () {
         document.getElementById("pdw-panel-db").style.display = 'none';
-    }
-
-    document.getElementById('phalcon-debugger-close-trace-tab').onclick = function () {
-        document.getElementById("pdw-panel-trace").style.display = 'none';
     }
 </script>
