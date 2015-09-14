@@ -1,8 +1,5 @@
 <?php
 
-// Include the SQL Formatter
-require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/vendor/jdorn/sql-formatter/lib/SqlFormatter.php';
-
 $profiles = $debugWidget->getProfiler()->getProfiles();
 $profiles = !$profiles? array() : $profiles;
 
