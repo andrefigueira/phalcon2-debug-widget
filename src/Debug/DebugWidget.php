@@ -57,8 +57,6 @@ class DebugWidget implements InjectionAwareInterface
      */
     public function __construct($di, $serviceNames = ['db' => ['db'], 'dispatch' => ['dispatcher'], 'view' => ['view']])
     {
-        forp_start();
-
         $this->di = $di;
         $this->startTime = microtime(true);
         $this->profiler = new Profiler();
