@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ffa580c0f5f724b1cf9e3a9e4cda313",
+    "hash": "9b1494d332a95f9f9345c82c541e39ed",
     "packages": [
+        {
+            "name": "aterrien/forp-profiler",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aterrien/forp-PHP-profiler.git",
+                "reference": "452c5044324f54111de207ff5c081df6c16a29d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aterrien/forp-PHP-profiler/zipball/452c5044324f54111de207ff5c081df6c16a29d7",
+                "reference": "452c5044324f54111de207ff5c081df6c16a29d7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    ""
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Terrien",
+                    "email": "forp@anthonyterrien.com"
+                }
+            ],
+            "description": "A PHP profiler written in C. forp is a lightweight PHP extension which provides the full call stack of your script, with CPU and memory usage, in a plain PHP Array or JSON output.",
+            "homepage": "https://github.com/aterrien/forp-PHP-profiler",
+            "keywords": [
+                "benchmark",
+                "php",
+                "profiler",
+                "quality"
+            ],
+            "time": "2014-10-12 15:05:21"
+        },
         {
             "name": "jdorn/sql-formatter",
             "version": "dev-master",
