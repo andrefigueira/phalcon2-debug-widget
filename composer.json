@@ -1,6 +1,6 @@
 {
     "name": "phalcon-tools/debugger",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Phalcon Debug toolbar",
     "require": {
         "php": ">=5.5.0",
